@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "carpetajiaddition",
+	"version": "${version}",
+	"name": "Carpet Aji Addition",
+	"description": "This is a carpet addition",
+	"authors": [
+		"Aji"
+	],
+	"contact": {
+		"homepage": "https://github.com/aji110905",
+		"sources": "https://github.com/aji110905/carpet-aji-addition"
+	},
+	"license": "MIT",
+	"icon": "assets/carpetajiaddition/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+            "aji.carpetajiaddition.CarpetAjiAdditionModEntryPoint"
+		]
+	},
+	"mixins": [
+		"carpet-aji-addition.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"minecraft": ">=${minecraft_version}",
+		"java": ">=21",
+		"carpet": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	},
+    "custom": {
+      "modmenu": {
+        "parent": "carpet"
+      }
+    }
+}

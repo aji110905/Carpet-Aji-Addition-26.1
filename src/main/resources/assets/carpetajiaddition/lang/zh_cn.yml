@@ -1,0 +1,118 @@
+carpetajiaddition:
+  version: "版本: "
+  color:
+    black: "黑色"
+    dark_blue: "深蓝色"
+    dark_green: "深绿色"
+    dark_aqua: "深青色"
+    dark_red: "深红色"
+    dark_purple: "深紫色"
+    gold: "金色"
+    gray: "灰色"
+    dark_gray: "深灰色"
+    blue: "蓝色"
+    green: "绿色"
+    aqua: "青色"
+    red: "红色"
+    light_purple: "浅紫色"
+    yellow: "黄色"
+    white: "白色"
+  command:
+    mods:
+      list:
+        hover: "点击查看详情"
+      mods:
+        feedback:
+          type: "类型: {0}"
+          id: "ID: {0}"
+          version: "版本: {0}"
+          environment:
+            client: "运行环境: 客户端"
+            server: "运行环境: 服务器"
+            universal: "运行环境: 客户端和服务器"
+            null: "运行环境: 未知"
+          author: "作者: {0}"
+          contributors: "贡献者: {0}"
+          contact:
+            root: "链接: {0}"
+            homepage: "主页"
+            sources: "源码"
+            issues: "问题提交"
+            hover: "点击跳转至连接"
+          license: "授权: {0}"
+          unknown: "未知"
+        error: "未知的模组: {0}"
+    follow:
+      add:
+        feedback: "已把{0}添加到跟随列表中"
+        error: "{0}已添加到跟随列表中"
+      remove:
+        feedback: "已把{0}从跟随列表中移除"
+        error: "{0}未添加到跟随列表中"
+      list:
+        error: "你还没有添加任何物品到跟随列表中"
+        feedback: "跟随列表中的物品有:"
+      color:
+        set:
+          feedback: "已将发光颜色设置为{0}"
+          error: "物品的发光颜色已经为{0}"
+        show:
+          feedback: "物品的发光颜色为{0}"
+
+  # ---------------------------------
+  # 传递给fabric-carpet的翻译
+  # 里面应该只出现category和rule两个字典
+  # ---------------------------------
+
+  carpet:
+    category:
+      CAA: "CAA"
+      recipe: "配方"
+    rule:
+      glowingHopperMinecart:
+        name: "发光的漏斗矿车"
+        desc: "漏斗矿车被锁定时会发出红光，反之白光。"
+      sitOnTheGround:
+        name: "席地而坐"
+        desc: "多次蹲下可以坐到地上。"
+      lockAllHopper:
+        name: "无能的漏斗"
+        desc: "所有漏斗都会被锁定，无论他有没有接受到红石信号。"
+      keepOpeningVault:
+        name: "无尽宝库"
+        desc: "同一个玩家可以一直开启同一个宝库。"
+      lockAllHopperMinecart:
+        name: "无能的漏斗矿车"
+        desc: "所有漏斗矿车都会被锁定，无论他下面是不是充能的激活铁轨。"
+      cactusWrench:
+        name: "翻转仙人掌"
+        desc: "仙人掌在副手时，放出来的方块为反方向。"
+      tameHorse:
+        name: "听话的马"
+        desc: "你可以100%驯服马。"
+      commandFollow:
+        name: "follow命令"
+        desc: "可以使用/follow命令。"
+      commandMods:
+        name: "mods命令"
+        desc: "可以使用/mods命令。"
+      safeMagmaBlock:
+        name: "不烫脚的岩浆块"
+        desc: "当你站在岩浆块时不会再掉血。"
+      toughTurtleEgg:
+        name: "坚韧海龟蛋"
+        desc: "海龟蛋不会被踩碎。"
+      removeEnderPortalDamage:
+        name: "移除末影珍珠伤害"
+        desc: "末影珍珠传送后不会造成伤害"
+
+    #-----------------
+    #下方的规则为配方规则
+    #-----------------
+
+      dragonEggRecipe:
+        name: "可合成龙蛋"
+        desc: "为龙蛋添加了合理的配方。"
+      dragonBreathRecipe:
+        name: "可合成龙息"
+        desc: "为龙息添加了合理的配方。"

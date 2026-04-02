@@ -1,0 +1,29 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "aji.carpetajiaddition.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "carpet.SettingsManagerMixin",
+    "command.follow.ItemEntityMixin",
+    "data.MinecraftServerMixin",
+    "data.ReloadCommandMixin",
+    "rules.cactusWrench.BlockItemMixin",
+    "rules.endlessVault.VaultServerDataMixin",
+    "rules.glowingHopperMinecart.MinecartHopperMixin",
+    "rules.lockAllHopper.HopperBlockEntityMixin",
+    "rules.lockAllHopperMinecart.MinecartHopperMixin",
+    "rules.recipeRule.RecipeManagerAccessor",
+    "rules.recipeRule.RecipeManagerMixin",
+    "rules.removeEnderPearlDamage.ThrownEnderPearlMixin",
+    "rules.safeMagmaBlock.MagmaBlockMixin",
+    "rules.sitOnTheGround.PlayerMixin",
+    "rules.tameHorse.AbstractHorseMixin",
+    "rules.toughTurtleEgg.TurtleEggBlockMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,6 +1,5 @@
 package aji.carpetajiaddition.mixin.rules.recipeRule;
 
-import aji.carpetajiaddition.recipe.CustomRecipes;
 import aji.carpetajiaddition.recipe.RecipeManager;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.resources.Identifier;
@@ -24,7 +23,7 @@ public abstract class RecipeManagerMixin {
     )
     private void addCustomRecipes(CallbackInfoReturnable<RecipeMap> cir, @Local(name = "recipes") SortedMap<Identifier, Recipe<?>> recipes) {
         RecipeManager.clearRecipeListMemory();
-        CustomRecipes.buildRecipes();
+        RecipeManager.buildRecipes();
         RecipeManager.registerRecipes(recipes, ((RecipeManagerAccessor) this).getRegistries());
     }
 }

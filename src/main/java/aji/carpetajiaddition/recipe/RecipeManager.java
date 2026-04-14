@@ -4,10 +4,10 @@ import aji.carpetajiaddition.CarpetAjiAdditionSettings;
 import aji.carpetajiaddition.recipe.builder.ShapedRecipeBuilder;
 import aji.carpetajiaddition.recipe.template.ShapedRecipeTemplate;
 import aji.carpetajiaddition.settings.RuleCategory;
-import aji.carpetajiaddition.util.MinecraftServerUtil;
 import carpet.api.settings.Rule;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -55,28 +55,27 @@ public class RecipeManager {
                 .output(DRAGON_BREATH, 1).build();
     }
 
-    public static void onRuleValueChanged(){
-        if (MinecraftServerUtil.serverIsRunning()) {
-            RecipeManager.clearRecipeListMemory();
-            buildRecipes();
-            CarpetAjiAdditionSettings.minecraftServer.execute(() -> {
-                needReloadServerResources();
-                for (RecipeHolder<?> recipe : CarpetAjiAdditionSettings.minecraftServer.getRecipeManager().getRecipes()) {
-                    if (recipe.id().identifier().getNamespace().equals(CarpetAjiAdditionSettings.MOD_ID)) {
-                        for (ServerPlayer player : CarpetAjiAdditionSettings.minecraftServer.getPlayerList().getPlayers()) {
-                            if (!player.getRecipeBook().contains(recipe.id())) {
-                                player.awardRecipes(List.of(recipe));
-                            }
+    public static void onRuleValueChanged(MinecraftServer server){
+        clearRecipeListMemory();
+        buildRecipes();
+        server.execute(() -> {
+            needReloadServerResources(server);
+            for (RecipeHolder<?> recipe : server.getRecipeManager().getRecipes()) {
+            if (recipe.id().identifier().getNamespace().equals(CarpetAjiAdditionSettings.MOD_ID)) {
+                    for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                        if (!player.getRecipeBook().contains(recipe.id())) {
+                            player.awardRecipes(List.of(recipe));
                         }
                     }
                 }
-            });
-        }
+            }
+        });
     }
 
     public static void onPlayerLoggedIn(ServerPlayer player){
-        if (MinecraftServerUtil.serverIsRunning() && hasActiveRecipeRule()) {
-            for (RecipeHolder<?> recipe : CarpetAjiAdditionSettings.minecraftServer.getRecipeManager().getRecipes()) {
+            MinecraftServer server = player.level().getServer();
+            if (hasActiveRecipeRule()) {
+            for (RecipeHolder<?> recipe : server.getRecipeManager().getRecipes()) {
                 if (recipe.id().identifier().getNamespace().equals(CarpetAjiAdditionSettings.MOD_ID) && !player.getRecipeBook().contains(recipe.id())) {
                     player.awardRecipes(List.of(recipe));
                 }
@@ -101,9 +100,9 @@ public class RecipeManager {
         return false;
     }
 
-    public static void needReloadServerResources() {
-        if (MinecraftServerUtil.serverIsRunning() && hasActiveRecipeRule()) {
-            CarpetAjiAdditionSettings.minecraftServer.reloadResources(CarpetAjiAdditionSettings.minecraftServer.getPackRepository().getSelectedIds());
+    public static void needReloadServerResources(MinecraftServer server) {
+        if (hasActiveRecipeRule()) {
+            server.reloadResources(server.getPackRepository().getSelectedIds());
         }
     }
 }

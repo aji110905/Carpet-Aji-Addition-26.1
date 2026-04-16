@@ -1,13 +1,7 @@
 package aji.carpetajiaddition.mixin.hooks;
 
 import aji.carpetajiaddition.CarpetAjiAdditionSettings;
-import net.minecraft.commands.CommandSource;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.ServerInfo;
-import net.minecraft.server.TickTask;
-import net.minecraft.util.thread.ReentrantBlockableEventLoop;
-import net.minecraft.world.level.chunk.storage.ChunkIOErrorReporter;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,18 +9,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MinecraftServer.class)
-public abstract class MinecraftServerMixin extends ReentrantBlockableEventLoop<@NotNull TickTask> implements ServerInfo, ChunkIOErrorReporter, CommandSource, AutoCloseable{
-    public MinecraftServerMixin(String name, boolean propagatesCrashes) {
-        super(name, propagatesCrashes);
-    }
-
+public abstract class MinecraftServerMixin {
     @Inject(method = "close", at = @At("RETURN"))
     private void close(CallbackInfo ci) {
         CarpetAjiAdditionSettings.EXTENSION.afterServerClose();
     }
 
     @Inject(method = "saveEverything", at = @At("HEAD"))
-    private void saveEverything(boolean suppressLogs, boolean flush, boolean force, CallbackInfoReturnable<Boolean> cir) {
+    private void saveEverything(boolean silent, boolean flush, boolean force, CallbackInfoReturnable<Boolean> cir) {
         CarpetAjiAdditionSettings.EXTENSION.onSave();
     }
 }
